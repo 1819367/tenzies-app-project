@@ -1,11 +1,14 @@
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-
 body {
-  font-family: Karla, sans-serif;
+  font-family: Inter, sans-serif;
   margin: 0;
+  font-size: 1rem;
+  color:#2b283A;
   background: #0B2434;
   padding: 20px;
   height: 100vh;
@@ -15,9 +18,6 @@ body {
   align-items: center;
 }
 
-/*  this is the layer between the body and the main elements. <div id="root"></div>
-select div with the id of root, the entire React element will be placed here. 
-We want the div to fill it's entire parent.  syntax div#root*/
 div#root { 
   height: 100%;
   width: 100%;
@@ -36,6 +36,32 @@ main {
 }
 
 .dice-container {
-  width: 320px;
-  height: 320px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto auto;
+  gap: 15px;
+  margin-right: 20px;
+  margin-left: 20px;
+  overflow-x: auto;
+}
+
+.btn-die {
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  border: none;
+  background: white;
+  font-family: Inter, sans-serif;
+  border-radius: 5px;
+  height: 36px;
+  width: 36px;
+  font-weight: 700;
+  font-size: 1.75rem;
+  cursor: pointer;
+}
+
+@media (min-width: 600px) {
+  .btn-die {
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+  }
 }
