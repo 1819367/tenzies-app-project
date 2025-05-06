@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: Inter, sans-serif;
+  font-family: Karla, sans-serif;
   margin: 0;
   font-size: 1rem;
   color:#2b283A;
@@ -45,17 +45,20 @@ main {
   overflow-x: auto;
 }
 
+button {
+  font-family: Karla, sans-serif;
+  cursor: pointer;
+  border: none;
+  font-weight: 700;
+}
+
 .btn-die {
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
-  border: none;
   background: white;
-  font-family: Inter, sans-serif;
   border-radius: 5px;
   height: 36px;
   width: 36px;
-  font-weight: 700;
   font-size: 1.75rem;
-  cursor: pointer;
 }
 
 @media (min-width: 600px) {
@@ -64,4 +67,13 @@ main {
     width: 50px;
     border-radius: 10px;
   }
+}
+
+.btn-roll {
+  background: #5035FF;
+  color: #f5f5f5;
+  padding: .6em 1.75em;
+  letter-spacing: 1px;
+  font-size: 1.2rem;
+  border-radius: 6px;
 }
