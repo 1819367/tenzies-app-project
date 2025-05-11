@@ -24,7 +24,10 @@ function rollDice () {
 
 //map over dice  array and for each die object render a Die component
 const diceElements = dice.map((dieObj) => (
-    <Die key={dieObj.id} value={dieObj.value} /> //pass value and id properties of each die as a props
+    <Die 
+      key={dieObj.id} 
+      value={dieObj.value} //pass value and id properties of each die as a props
+      isHeld={dieObj.isHeld}/> //pass isHeld property of each die as a props
 ))
 
   return (
@@ -33,7 +36,7 @@ const diceElements = dice.map((dieObj) => (
         {diceElements}
       </div>
       <button 
-        className='btn-roll'
+        className='btn-roll btn-roll_style'
         onClick={() => rollDice()}  
         >
             Roll
