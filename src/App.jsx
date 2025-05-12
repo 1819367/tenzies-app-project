@@ -3,7 +3,7 @@ import './App.css'
 import Die from './components/Die'
 import { nanoid } from 'nanoid'
 
-export default function App(props) {
+export default function App() {
 
 // state to hold array of dice
 const [ dice, setDice ] = useState(generateAllNewDice());
@@ -22,9 +22,11 @@ function generateAllNewDice() {
 function rollDice () {
    setDice(generateAllNewDice())}
   
-//create a function to hold that takes id as a parameter, console.log the id
+//update the hold function to flip 'isHeld' property on the object in the array that was clicked
 function hold(id) {
- console.log(id)
+ setDice(prevDice => prevDice.map(item => {
+  return item.id === id ? {...item, isHeld: !item.isHeld} : item
+ }))
 }
 
 //map over dice  array and for each die object render a Die component
