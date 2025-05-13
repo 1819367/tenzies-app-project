@@ -20,13 +20,19 @@ function generateAllNewDice() {
 
 //generate new dice with button click and update the state
 function rollDice () {
-   setDice(generateAllNewDice())}
+  setDice(prevDice => prevDice.map(die => //prevDice.map loops through each die
+    die.isHeld ? 
+      die : //if die.isHeld is true, return the die as is
+      {...die, value: Math.ceil(Math.random() * 6) } //If not, return a new object with all the properties, but a new random value
+  ))}
   
-//update the hold function to flip 'isHeld' property on the object in the array that was clicked
+//refactored, update the hold function to flip 'isHeld' property on the object in the array that was clicked
 function hold(id) {
- setDice(prevDice => prevDice.map(item => {
-  return item.id === id ? {...item, isHeld: !item.isHeld} : item
- }))
+ setDice(prevDice => prevDice.map(item => 
+    item.id === id ? 
+      {...item, isHeld: !item.isHeld} :
+      item
+ ))
 }
 
 //map over dice  array and for each die object render a Die component
@@ -42,6 +48,10 @@ const diceElements = dice.map((dieObj) => (
 
   return (
     <main>
+      <div>
+        <h1 className='title'>Tenzies</h1>
+        <p className='instructions'>Roll until all the dice are the same.  Click each die to freeze its current value between rolls.</p>
+      </div>
       <div className='dice-container'>
         {diceElements}
       </div>
