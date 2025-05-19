@@ -14,7 +14,7 @@ export default function App() {
   const gameWon = (allHeld && allSameValue) //true if both conditions are true
 
   function generateAllNewDice() {
-    console.log("generateAllNewDice was called")
+    // console.log("generateAllNewDice was called")  //to test lazy state initialization
     return new Array(10) //creates a new array of length 10
       .fill(0) //fill it with zeros
       .map(() => ({     ///map over the array, replace each zero and return an object
@@ -26,11 +26,16 @@ export default function App() {
 
   //generate new dice with button click and update the state
   function rollDice () {
-    setDice(prevDice => prevDice.map(die => //prevDice.map loops through each die
-      die.isHeld ? 
-        die : //if die.isHeld is true, return the die as is
-        {...die, value: Math.ceil(Math.random() * 6) } //If not, return a new object with all the properties, but a new random value
-  ))}
+    if (!gameWon) { 
+      setDice(prevDice => prevDice.map(die => //prevDice.map loops through each die
+        die.isHeld ? 
+          die : //if die.isHeld is true, return the die as is
+          {...die, value: Math.ceil(Math.random() * 6) } //If not, return a new object with all the properties, but a new random value
+      )) 
+    } else {
+       setDice(generateAllNewDice()) //code added to play new game when button is clicked
+    }
+  }
   
   //refactored, update the hold function to flip 'isHeld' property on the object in the array that was clicked
   function hold(id) {
