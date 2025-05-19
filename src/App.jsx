@@ -7,13 +7,14 @@ import Confetti from 'react-confetti'
 export default function App() {
 
   // state to hold array of dice
-  const [ dice, setDice ] = useState(generateAllNewDice());
+  const [ dice, setDice ] = useState(() => generateAllNewDice());  //lazy state initialization
 
   const allHeld = dice.every(die => die.isHeld); //true if all dice are held
   const allSameValue = dice.every(die => die.value === dice[0].value); //true if all dice have the same value
   const gameWon = (allHeld && allSameValue) //true if both conditions are true
 
   function generateAllNewDice() {
+    console.log("generateAllNewDice was called")
     return new Array(10) //creates a new array of length 10
       .fill(0) //fill it with zeros
       .map(() => ({     ///map over the array, replace each zero and return an object
@@ -53,20 +54,19 @@ export default function App() {
 
   return (
     <main>
+      { gameWon && < Confetti /> }
       <div>
         <h1 className='title'>Tenzies</h1>
         <p className='instructions'>Roll until all the dice are the same.  Click each die to freeze its current value between rolls.</p>
       </div>
       <div className='dice-container'>
-           {gameWon && <Confetti /> }
         {diceElements}
       </div>
       <button 
         className='btn-roll btn-roll_style'
         onClick={() => rollDice()}  
         >
-           {gameWon ? "New Game" : "Roll" }  
-        
+           {gameWon ? "New Game" : "Roll" }   
       </button>
     </main>
   )
