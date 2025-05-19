@@ -2,12 +2,12 @@ import { useState } from 'react'
 import './App.css'
 import Die from './components/Die'
 import { nanoid } from 'nanoid'
+import Confetti from 'react-confetti'
 
 export default function App() {
 
   // state to hold array of dice
   const [ dice, setDice ] = useState(generateAllNewDice());
-
 
   const allHeld = dice.every(die => die.isHeld); //true if all dice are held
   const allSameValue = dice.every(die => die.value === dice[0].value); //true if all dice have the same value
@@ -58,6 +58,7 @@ export default function App() {
         <p className='instructions'>Roll until all the dice are the same.  Click each die to freeze its current value between rolls.</p>
       </div>
       <div className='dice-container'>
+           {gameWon && <Confetti /> }
         {diceElements}
       </div>
       <button 
@@ -65,6 +66,7 @@ export default function App() {
         onClick={() => rollDice()}  
         >
            {gameWon ? "New Game" : "Roll" }  
+        
       </button>
     </main>
   )
