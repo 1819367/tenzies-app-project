@@ -1,17 +1,23 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './App.css'
 import Die from './components/Die'
 import { nanoid } from 'nanoid'
 import Confetti from 'react-confetti'
 
 export default function App() {
+  const buttonRef = useRef(null);
 
   // state to hold array of dice
   const [ dice, setDice ] = useState(() => generateAllNewDice());  //lazy state initialization
 
-  const allHeld = dice.every(die => die.isHeld); //true if all dice are held
-  const allSameValue = dice.every(die => die.value === dice[0].value); //true if all dice have the same value
-  const gameWon = (allHeld && allSameValue) //true if both conditions are true
+ //refactored code
+  const gameWon = dice.every(die => die.isHeld) && dice.every(die => die.value === dice[0].value)
+
+  useEffect(() => {
+    if(gameWon) {
+      buttonRef.current.focus();
+      }
+    }, [gameWon]);
 
   function generateAllNewDice() {
     // console.log("generateAllNewDice was called")  //to test lazy state initialization
@@ -73,6 +79,7 @@ export default function App() {
       <button 
         className='btn-roll btn-roll_style'
         onClick={() => rollDice()}  
+        ref={buttonRef}
         >
            {gameWon ? "New Game" : "Roll" }   
       </button>
